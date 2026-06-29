@@ -1,183 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barcelona 25–28 Septiembre | Itinerario 4 amigos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Barcelona · Eurotrip 2026</title>
+  <meta name="description" content="Itinerario Barcelona 25 al 28 de septiembre para 4 amigos." />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
   <header class="hero">
     <nav class="topbar">
-      <div class="brand">BCN · 25–28 Sept.</div>
+      <div class="brand">BCN · Eurotrip</div>
       <div class="navlinks">
         <a href="#itinerario">Itinerario</a>
-        <a href="#mapas">Mapas</a>
-        <a href="#transporte">Transporte</a>
+        <a href="#mapa">Mapa</a>
         <a href="#presupuesto">Presupuesto</a>
-        <a href="#reservas">Reservas</a>
+        <a href="#estadios">Estadios</a>
+        <a href="#checklist">Checklist</a>
       </div>
+      <button id="themeToggle" class="ghost">Modo oscuro</button>
     </nav>
-    <section class="hero-content">
-      <p class="eyebrow">Guía para presentar al grupo</p>
-      <h1>Barcelona: 25–28 de septiembre</h1>
-      <p class="subtitle">Itinerario optimizado para 4 amigos, saliendo desde <strong>Carrer Nou de la Rambla, 31</strong>.</p>
-      <div class="hero-cards">
-        <div><span>Base</span><strong>El Raval / Paral·lel</strong></div>
-        <div><span>Fechas</span><strong>25/09 llegada 13:00 · 26 y 27 días completos · 28/09 salida 09:00</strong></div>
-        <div><span>Ritmo</span><strong>Realista</strong></div>
-        <div><span>Prioridad</span><strong>Llegada suave + Gaudí + estadio</strong></div>
+
+    <section class="hero-grid">
+      <div>
+        <p class="eyebrow">25/09 13:00 → 28/09 09:00</p>
+        <h1>Barcelona en 2 días completos + tarde de llegada</h1>
+        <p class="lead">
+          Itinerario optimizado para 4 amigos, usando como base el alojamiento en
+          <strong>Carrer Nou de la Rambla, 31</strong>. La prioridad es evitar reservas
+          caras el día de llegada y concentrar lo fuerte el 26 y 27.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#itinerario">Ver itinerario</a>
+          <a class="btn secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Carrer+Nou+de+la+Rambla+31+Barcelona">Abrir alojamiento en Maps</a>
+        </div>
       </div>
+      <aside class="hero-card">
+        <h2>Resumen rápido</h2>
+        <div class="stat"><span>Base</span><strong>Raval / Paral·lel</strong></div>
+        <div class="stat"><span>Personas</span><strong>4</strong></div>
+        <div class="stat"><span>Ritmo</span><strong>Realista</strong></div>
+        <div class="stat"><span>Clave</span><strong>No sobrecargar el 25</strong></div>
+      </aside>
     </section>
   </header>
 
   <main>
-    <section class="section grid-2" id="resumen">
-      <div>
-        <p class="eyebrow">Resumen ejecutivo</p>
-        <h2>La idea del viaje</h2>
-        <p>El plan combina los imprescindibles de Barcelona con zonas para caminar, comer y salir sin convertir el viaje en una maratón de entradas caras.</p>
-        <ul class="checklist">
-          <li>No reservar entradas caras el día de llegada.</li>
-          <li>Sagrada Familia y Park Güell concentrados el 26/09.</li>
-          <li>Día 25: recorrido caminando cerca del alojamiento.</li>
-          <li>Día 27: centro, estadio opcional, Barceloneta y Montjuïc.</li>
-        </ul>
+    <section class="section" id="resumen">
+      <div class="section-head">
+        <p class="eyebrow">Plan recomendado</p>
+        <h2>Qué cambia con los horarios reales</h2>
       </div>
-      <div class="panel">
-        <h3>Decisiones del grupo</h3>
-        <div class="decision"><strong>1.</strong> ¿Casa Batlló o La Pedrera?</div>
-        <div class="decision"><strong>2.</strong> ¿Museo Picasso o más calle en El Born?</div>
-        <div class="decision"><strong>3.</strong> ¿Tour de estadio o partido si coincide?</div>
-        <div class="decision"><strong>4.</strong> Presupuesto máximo por persona.</div>
+      <div class="cards three">
+        <article class="card">
+          <h3>25/09 · Llegada</h3>
+          <p>Como llegan a las 13:00, este día queda para check-in, Rambla, Gótico, Port Vell y cena. Sin entradas con horario fijo.</p>
+        </article>
+        <article class="card">
+          <h3>26/09 · Día fuerte Gaudí</h3>
+          <p>Sagrada Familia, Sant Pau, Park Güell y Bunkers. Es el día más importante y conviene reservar con anticipación.</p>
+        </article>
+        <article class="card">
+          <h3>27/09 · Centro + fútbol</h3>
+          <p>Casa Batlló o La Pedrera, Palau, El Born, Barceloneta, opción Camp Nou y cierre en Montjuïc.</p>
+        </article>
       </div>
     </section>
 
     <section class="section" id="alojamiento">
-      <p class="eyebrow">Base del viaje</p>
-      <h2>Alojamiento: Carrer Nou de la Rambla, 31</h2>
-      <div class="cards three">
-        <article class="card"><h3>Ubicación</h3><p>Zona muy práctica para 3 días: cerca de La Rambla, Gótico, puerto, Paral·lel, Poble-sec y Montjuïc.</p></article>
-        <article class="card"><h3>Metro cercano</h3><p>Paral·lel conecta con L2 y L3. Drassanes conecta con L3. Esto facilita Sagrada Familia, Passeig de Gràcia y Camp Nou.</p></article>
-        <article class="card"><h3>Uso diario</h3><p>Conviene volver al alojamiento antes de la cena si necesitan descansar, cargar celulares o cambiarse para salir.</p></article>
+      <div class="section-head">
+        <p class="eyebrow">Base logística</p>
+        <h2>Alojamiento: Carrer Nou de la Rambla, 31</h2>
+      </div>
+      <div class="split">
+        <div class="card">
+          <h3>Ventajas de la ubicación</h3>
+          <ul class="checklist">
+            <li>A metros de La Rambla y Plaça Reial.</li>
+            <li>Muy cómodo para Barrio Gótico, Port Vell, Poble-sec y Sant Antoni.</li>
+            <li>Cerca del metro Paral·lel, útil para Sagrada Familia, Camp Nou y Montjuïc.</li>
+            <li>Permite volver caminando de noche desde varias zonas céntricas.</li>
+          </ul>
+        </div>
+        <div class="card warning">
+          <h3>Consejo de zona</h3>
+          <p>La zona es práctica y céntrica, pero conviene tener cuidado con carteras y celulares en La Rambla, metro y lugares con mucha gente.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="mapas">
-      <p class="eyebrow">Mapas esquemáticos</p>
-      <h2>Recorridos por día</h2>
-      <div class="tabs">
-        <button data-map="day1" class="active">Día 1</button>
-        <button data-map="day2">Día 2</button>
-        <button data-map="day3">Día 3</button>
-        <button data-map="day4">Salida</button>
-        <button data-map="all">Mapa general</button>
+    <section class="section" id="transporte">
+      <div class="section-head">
+        <p class="eyebrow">Cómo moverse</p>
+        <h2>Transporte recomendado</h2>
       </div>
-      <div class="map-wrap">
-        <svg id="routeMap" viewBox="0 0 900 560" role="img" aria-label="Mapa esquemático de recorridos"></svg>
+      <div class="cards four">
+        <article class="card">
+          <h3>Aeropuerto</h3>
+          <p>Aerobús hasta Plaça Catalunya o taxi directo. Para 4 personas, taxi puede ser cómodo si llegan cansados.</p>
+        </article>
+        <article class="card">
+          <h3>Metro / bus</h3>
+          <p>T-Casual individual para trayectos urbanos. No es grupal. Usar Google Maps/TMB para combinar líneas.</p>
+        </article>
+        <article class="card">
+          <h3>Taxi / Cabify / Bolt</h3>
+          <p>Conviene en subidas como Park Güell, Bunkers, Montjuïc o si vuelven tarde.</p>
+        </article>
+        <article class="card">
+          <h3>Caminar</h3>
+          <p>Ideal para Rambla, Gótico, Born, Barceloneta, Port Vell, Poble-sec y Sant Antoni.</p>
+        </article>
       </div>
-      <p class="note">Mapa esquemático: sirve para visualizar ubicación relativa y orden de recorrido. Para navegar en la calle, abrir cada punto en Google Maps.</p>
+      <div class="rule">
+        <strong>Regla práctica:</strong> menos de 1,5 km caminar; entre 1,5 y 4 km metro/bus; más de 4 km o subidas, taxi o transporte público.
+      </div>
     </section>
 
     <section class="section" id="itinerario">
-      <p class="eyebrow">Itinerario optimizado</p>
-      <h2>Plan día por día</h2>
+      <div class="section-head">
+        <p class="eyebrow">Cronograma realista</p>
+        <h2>Itinerario por día</h2>
+      </div>
       <div id="daysContainer"></div>
     </section>
 
+    <section class="section" id="mapa">
+      <div class="section-head">
+        <p class="eyebrow">Mapa interactivo</p>
+        <h2>Recorridos por día</h2>
+      </div>
+      <div class="map-tabs">
+        <button class="active" data-route="day1">Día 1</button>
+        <button data-route="day2">Día 2</button>
+        <button data-route="day3">Día 3</button>
+        <button data-route="day4">Salida</button>
+        <button data-route="all">Todos</button>
+      </div>
+      <div id="map"></div>
+      <p class="note">El mapa usa OpenStreetMap/Leaflet. Las distancias son aproximadas y los botones de cada parada abren Google Maps.</p>
+    </section>
+
     <section class="section" id="ranking">
-      <p class="eyebrow">Valor real</p>
-      <h2>Qué lugares valen la pena</h2>
+      <div class="section-head">
+        <p class="eyebrow">Qué vale la pena</p>
+        <h2>Ranking de atracciones</h2>
+      </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Lugar</th><th>Prioridad</th><th>Veredicto</th><th>Comentario</th></tr></thead>
+          <thead><tr><th>Lugar</th><th>Valor</th><th>Prioridad</th><th>Comentario</th></tr></thead>
           <tbody id="rankingBody"></tbody>
         </table>
       </div>
     </section>
 
-    <section class="section grid-2" id="transporte">
-      <div>
-        <p class="eyebrow">Cómo moverse</p>
-        <h2>Transporte recomendado</h2>
-        <p>Para 2 días completos + tarde de llegada, la opción más simple es comprar T-Casual individual o combinar trayectos cortos caminando con taxis puntuales cuando sean 4 personas.</p>
-        <ul class="checklist">
-          <li><strong>T-Casual:</strong> 10 viajes, útil para metro, bus, tranvía y tren urbano. No es grupal.</li>
-          <li><strong>Taxi/Cabify/Bolt:</strong> conviene para subidas, noche o trayectos cruzados de 4 personas.</li>
-          <li><strong>Aeropuerto:</strong> Aerobús o taxi. La T-Casual no cubre Metro L9 desde/hacia aeropuerto.</li>
-          <li><strong>Caminar:</strong> muy recomendable en Gótico, Born, Rambla, Barceloneta y Montjuïc bajo.</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3>Regla práctica</h3>
-        <p><strong>Menos de 1,5 km:</strong> caminar.</p>
-        <p><strong>1,5 a 4 km:</strong> metro/bus según conexión.</p>
-        <p><strong>Más de 4 km o de noche:</strong> comparar taxi para 4.</p>
-        <p><strong>Subidas:</strong> mejor bus/taxi, especialmente Park Güell, Bunkers y Montjuïc.</p>
-      </div>
-    </section>
-
     <section class="section" id="estadios">
-      <p class="eyebrow">Fútbol</p>
-      <h2>Opciones de estadio</h2>
+      <div class="section-head">
+        <p class="eyebrow">Fútbol</p>
+        <h2>Opciones de estadio</h2>
+      </div>
       <div class="cards two">
-        <article class="card featured"><h3>Barça Immersive Tour / Camp Nou Experience</h3><p><strong>Recomendación:</strong> mejor opción futbolera por historia, museo y tienda. Ideal Día 3 por la mañana.</p><p><strong>Desde alojamiento:</strong> 5,2 km · Metro L3 desde Drassanes/Paral·lel hacia Les Corts o Palau Reial · 25–35 min.</p><p><strong>Plan B:</strong> si hay partido, priorizar partido por encima del tour.</p></article>
-        <article class="card"><h3>RCDE Stadium</h3><p>Tour del estadio del Espanyol. Es más lejos, pero puede ser interesante si quieren un tour más clásico de vestuarios/campo.</p><p><strong>Desde alojamiento:</strong> aprox. 11–13 km · transporte público 45–60 min · taxi 25–35 min.</p><p><strong>Recomendación:</strong> solo si el grupo es muy futbolero o si hay partido.</p></article>
+        <article class="card highlight">
+          <h3>Barça Immersive Tour / Camp Nou Experience</h3>
+          <p><strong>Recomendación:</strong> mejor opción futbolera por historia, museo y tienda. Ideal el 27/09 si no hay partido.</p>
+          <p><strong>Transporte desde alojamiento:</strong> aprox. 5,5 km. Metro L3 desde Paral·lel hacia Les Corts/Palau Reial o taxi 20–25 min.</p>
+          <p><strong>Duración:</strong> 1 h 30 a 2 h.</p>
+        </article>
+        <article class="card">
+          <h3>RCDE Stadium</h3>
+          <p>Tour del estadio del Espanyol. Más lejos del centro, recomendable solo si son muy futboleros o si coincide un partido.</p>
+          <p><strong>Transporte:</strong> tren/metro + caminata o taxi. Calcular 35–50 min.</p>
+        </article>
+      </div>
+      <div class="rule">
+        <strong>Decisión:</strong> si hay partido de Barça o Espanyol durante la estadía, priorizar partido sobre tour.
       </div>
     </section>
 
-    <section class="section" id="comidas">
-      <p class="eyebrow">Comida y salidas</p>
-      <h2>Restaurantes y zonas recomendadas</h2>
+    <section class="section" id="restaurantes">
+      <div class="section-head">
+        <p class="eyebrow">Dónde comer</p>
+        <h2>Restaurantes y zonas recomendadas</h2>
+      </div>
       <div class="cards three">
-        <article class="card"><h3>Cerca del alojamiento</h3><p>Poble-sec y Sant Antoni: mejores para cenar que las zonas ultra turísticas de La Rambla.</p><p><strong>Plan:</strong> tapas, vermut, hamburguesas, bares casuales.</p></article>
-        <article class="card"><h3>El Born / Gótico</h3><p>Muy buena zona para tapas y bares, aunque conviene evitar locales con menú turístico agresivo.</p><p><strong>Plan:</strong> cena Día 1 o Día 2.</p></article>
-        <article class="card"><h3>Barceloneta / Poblenou</h3><p>Buena opción para almorzar el Día 3. Para paella, reservar y evitar restaurantes con captadores en primera línea.</p><p><strong>Plan:</strong> almuerzo más largo y relajado.</p></article>
+        <article class="card">
+          <h3>Cerca del alojamiento</h3>
+          <p>Poble-sec y Sant Antoni son mejores que La Rambla para cenar: tapas, vermut, hamburguesas y opciones más locales.</p>
+        </article>
+        <article class="card">
+          <h3>El Born</h3>
+          <p>Buena zona para almuerzo o cena con tapas. Ideal para combinar con Palau de la Música, Santa Maria del Mar o Museo Picasso.</p>
+        </article>
+        <article class="card">
+          <h3>Barceloneta / Poblenou</h3>
+          <p>Plan de playa y comida. Para paella, reservar y evitar lugares demasiado turísticos frente al mar.</p>
+        </article>
       </div>
     </section>
 
     <section class="section" id="presupuesto">
-      <p class="eyebrow">Números</p>
-      <h2>Presupuesto estimado</h2>
+      <div class="section-head">
+        <p class="eyebrow">Estimaciones</p>
+        <h2>Presupuesto aproximado</h2>
+      </div>
       <div class="budget-grid">
-        <div class="budget-card"><span>Versión ahorro</span><strong>€200–280</strong><small>por persona, sin alojamiento</small></div>
-        <div class="budget-card"><span>Versión equilibrada</span><strong>€300–400</strong><small>por persona, sin alojamiento</small></div>
-        <div class="budget-card"><span>Versión completa</span><strong>€420–520</strong><small>por persona, sin alojamiento</small></div>
+        <div class="card">
+          <h3>Por persona</h3>
+          <div class="money">€300–420</div>
+          <p>Sin alojamiento. Incluye entradas principales, transporte urbano y comidas de ritmo medio.</p>
+        </div>
+        <div class="card">
+          <h3>Grupo de 4</h3>
+          <div class="money">€1.200–1.680</div>
+          <p>Sin alojamiento. Puede bajar si ven Casa Batlló/La Pedrera solo por fuera o eliminan el tour de estadio.</p>
+        </div>
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Concepto</th><th>Por persona</th><th>Grupo x4</th><th>Notas</th></tr></thead>
+          <thead><tr><th>Concepto</th><th>Por persona</th><th>Grupo x4</th></tr></thead>
           <tbody>
-            <tr><td>Entradas principales</td><td>€130–220</td><td>€520–880</td><td>Depende de Casa Batlló/Pedrera, estadio y museos.</td></tr>
-            <tr><td>Transporte local</td><td>€15–35</td><td>€60–140</td><td>T-Casual + taxis puntuales.</td></tr>
-            <tr><td>Comidas</td><td>€120–180</td><td>€480–720</td><td>2 días completos + tarde de llegada, ritmo medio.</td></tr>
-            <tr><td>Total recomendado</td><td>€300–400</td><td>€1.200–1.600</td><td>Sin alojamiento ni vuelos.</td></tr>
+            <tr><td>Entradas</td><td>€140–220</td><td>€560–880</td></tr>
+            <tr><td>Transporte urbano</td><td>€15–30</td><td>€60–120</td></tr>
+            <tr><td>Comidas</td><td>€120–180</td><td>€480–720</td></tr>
+            <tr><td>Extras</td><td>€25–60</td><td>€100–240</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <section class="section" id="reservas">
-      <p class="eyebrow">Checklist</p>
-      <h2>Reservas y pendientes</h2>
-      <div class="cards two">
-        <article class="card"><h3>Comprar cuanto antes</h3><ul class="checklist"><li>Sagrada Familia.</li><li>Park Güell.</li><li>Casa Batlló o La Pedrera.</li><li>Barça Immersive Tour / Camp Nou Experience.</li></ul></article>
-        <article class="card"><h3>Confirmar cerca de la fecha</h3><ul class="checklist"><li>Fixture de FC Barcelona / Espanyol.</li><li>Horarios de Fuente Mágica y horarios del vuelo de regreso.</li><li>Clima y alternativa por lluvia.</li><li>Restaurante especial para una cena grupal.</li></ul></article>
+    <section class="section" id="checklist">
+      <div class="section-head">
+        <p class="eyebrow">Pendientes</p>
+        <h2>Checklist de reservas</h2>
       </div>
+      <div class="check-grid" id="checklistBox"></div>
     </section>
 
     <section class="section" id="fuentes">
-      <p class="eyebrow">Referencias</p>
-      <h2>Fuentes para validar precios</h2>
-      <p>Los precios son estimativos y conviene reconfirmarlos antes de comprar. El sitio incluye enlaces oficiales o de referencia para revisar disponibilidad.</p>
+      <div class="section-head">
+        <p class="eyebrow">Referencias</p>
+        <h2>Fuentes útiles para verificar antes de comprar</h2>
+      </div>
       <div id="sourcesList" class="sources"></div>
+      <p class="note">Antes de reservar, confirmar precios y horarios oficiales porque pueden cambiar.</p>
     </section>
   </main>
 
   <footer>
-    <p>Barcelona · 25/09 13:00 a 28/09 09:00 · Base: Carrer Nou de la Rambla, 31</p>
+    <p>Barcelona · Itinerario para 4 amigos · Última actualización: versión con llegada 25/09 13:00 y salida 28/09 09:00.</p>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

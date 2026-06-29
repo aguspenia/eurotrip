@@ -1,49 +1,57 @@
-const lodging = {id:'hotel', name:'Alojamiento', lat:41.37882, lon:2.17413};
+const lodging = {id:'hotel', name:'Alojamiento', lat:41.37882, lon:2.17413, type:'base'};
+
 const points = {
   hotel: lodging,
-  aeropuerto:{id:'aeropuerto', name:'Aeropuerto BCN', lat:41.2974, lon:2.0833},
-  rambla:{id:'rambla', name:'La Rambla', lat:41.3808, lon:2.1738},
-  plazareal:{id:'plazareal', name:'Plaça Reial', lat:41.3801, lon:2.1751},
-  gotico:{id:'gotico', name:'Barrio Gótico', lat:41.3839, lon:2.1763},
-  catedral:{id:'catedral', name:'Catedral', lat:41.3839, lon:2.1762},
-  portvell:{id:'portvell', name:'Port Vell', lat:41.3763, lon:2.1834},
-  sagrada:{id:'sagrada', name:'Sagrada Familia', lat:41.4036, lon:2.1744},
-  santpau:{id:'santpau', name:'Sant Pau', lat:41.4135, lon:2.1742},
-  parkguell:{id:'parkguell', name:'Park Güell', lat:41.4145, lon:2.1527},
-  bunkers:{id:'bunkers', name:'Bunkers del Carmel', lat:41.4195, lon:2.1618},
-  batllo:{id:'batllo', name:'Casa Batlló', lat:41.3917, lon:2.1649},
-  pedrera:{id:'pedrera', name:'La Pedrera', lat:41.3954, lon:2.1619},
-  palau:{id:'palau', name:'Palau de la Música', lat:41.3876, lon:2.1753},
-  born:{id:'born', name:'El Born / Picasso', lat:41.3852, lon:2.1810},
-  barceloneta:{id:'barceloneta', name:'Barceloneta', lat:41.3790, lon:2.1896},
-  campnou:{id:'campnou', name:'Barça Immersive Tour', lat:41.3809, lon:2.1228},
-  montjuic:{id:'montjuic', name:'Castillo Montjuïc', lat:41.3635, lon:2.1663},
-  mnac:{id:'mnac', name:'MNAC', lat:41.3688, lon:2.1530},
-  fonts:{id:'fonts', name:'Fuente Mágica', lat:41.3711, lon:2.1516}
+  aeropuerto:{id:'aeropuerto', name:'Aeropuerto BCN', lat:41.2974, lon:2.0833, type:'airport'},
+  rambla:{id:'rambla', name:'La Rambla', lat:41.3808, lon:2.1738, type:'walk'},
+  plazareal:{id:'plazareal', name:'Plaça Reial', lat:41.3801, lon:2.1751, type:'walk'},
+  gotico:{id:'gotico', name:'Barrio Gótico', lat:41.3839, lon:2.1763, type:'walk'},
+  catedral:{id:'catedral', name:'Catedral de Barcelona', lat:41.3839, lon:2.1762, type:'walk'},
+  portvell:{id:'portvell', name:'Port Vell', lat:41.3763, lon:2.1834, type:'walk'},
+  sagrada:{id:'sagrada', name:'Sagrada Familia', lat:41.4036, lon:2.1744, type:'ticket'},
+  santpau:{id:'santpau', name:'Recinte Modernista Sant Pau', lat:41.4135, lon:2.1742, type:'ticket'},
+  parkguell:{id:'parkguell', name:'Park Güell', lat:41.4145, lon:2.1527, type:'ticket'},
+  bunkers:{id:'bunkers', name:'Bunkers del Carmel', lat:41.4195, lon:2.1618, type:'view'},
+  batllo:{id:'batllo', name:'Casa Batlló', lat:41.3917, lon:2.1649, type:'ticket'},
+  pedrera:{id:'pedrera', name:'La Pedrera', lat:41.3954, lon:2.1619, type:'ticket'},
+  palau:{id:'palau', name:'Palau de la Música Catalana', lat:41.3876, lon:2.1753, type:'ticket'},
+  born:{id:'born', name:'El Born / Museo Picasso', lat:41.3852, lon:2.1810, type:'walk'},
+  barceloneta:{id:'barceloneta', name:'Barceloneta', lat:41.3790, lon:2.1896, type:'walk'},
+  campnou:{id:'campnou', name:'Barça Immersive Tour', lat:41.3809, lon:2.1228, type:'stadium'},
+  montjuic:{id:'montjuic', name:'Castillo de Montjuïc', lat:41.3635, lon:2.1663, type:'view'},
+  mnac:{id:'mnac', name:'MNAC / Mirador', lat:41.3688, lon:2.1530, type:'view'},
+  fonts:{id:'fonts', name:'Fuente Mágica', lat:41.3711, lon:2.1516, type:'view'}
 };
 
 const routes = {
   day1:['aeropuerto','hotel','rambla','plazareal','gotico','catedral','portvell','hotel'],
   day2:['hotel','sagrada','santpau','parkguell','bunkers','hotel'],
   day3:['hotel','batllo','pedrera','palau','born','barceloneta','campnou','montjuic','mnac','fonts','hotel'],
-  all:['aeropuerto','hotel','rambla','plazareal','gotico','catedral','portvell','sagrada','santpau','parkguell','bunkers','batllo','pedrera','palau','born','barceloneta','campnou','montjuic','mnac','fonts']
+  day4:['hotel','aeropuerto'],
+  all:Object.keys(points)
 };
 
-function rad(x){return x*Math.PI/180}
-function hav(a,b){const R=6371; const dLat=rad(b.lat-a.lat), dLon=rad(b.lon-a.lon); const s=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2; return 2*R*Math.asin(Math.sqrt(s));}
-function distKm(a,b){return Math.max(0.3,hav(a,b)*1.25)}
-function walkMin(km){return Math.round(km/4.6*60)}
-function taxiMin(km){return Math.round(8+km/22*60)}
+function rad(x){ return x*Math.PI/180; }
+function hav(a,b){
+  const R=6371;
+  const dLat=rad(b.lat-a.lat), dLon=rad(b.lon-a.lon);
+  const s=Math.sin(dLat/2)**2 + Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;
+  return 2*R*Math.asin(Math.sqrt(s));
+}
+function distKm(a,b){ return Math.max(0.25, hav(a,b)*1.22); }
+function walkMin(km){ return Math.round(km/4.6*60); }
+function taxiMin(km){ return Math.max(6, Math.round(6 + km/23*60)); }
+function gmaps(p){ return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name+' Barcelona')}`; }
+
 function transportHint(from,to){
   const km=distKm(points[from],points[to]);
   if(from==='aeropuerto' || to==='aeropuerto') return 'Aerobús/taxi';
   if(km<1.4) return 'Caminar';
-  if(['parkguell','bunkers','montjuic'].includes(to)) return 'Bus/taxi por subida';
+  if(['parkguell','bunkers','montjuic','mnac','fonts'].includes(to)) return 'Bus/taxi por subida';
   if(to==='campnou') return 'Metro L3';
   if(km>4.5) return 'Metro o taxi';
   return 'Metro/bus';
 }
-function gmaps(p){return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name+' Barcelona')}`}
 
 const dayData = [
  {id:'day1', title:'Día 1 · Jueves 25/09 · Llegada + primera vuelta', label:'No reservar entradas caras · recorrido flexible cerca del alojamiento', stops:[
@@ -96,6 +104,17 @@ const ranking = [
  ['RCDE Stadium','⭐⭐⭐','Opcional futbolero','Más lejos; hacerlo solo si el grupo es muy futbolero o hay partido.']
 ];
 
+const checklist = [
+  ['Sagrada Familia', 'Reservar entrada para el 26/09 a la mañana.'],
+  ['Park Güell', 'Reservar para el 26/09 a la tarde.'],
+  ['Casa Batlló o La Pedrera', 'Decidir una sola para cuidar presupuesto.'],
+  ['Palau de la Música', 'Comprar visita guiada si les interesa arquitectura.'],
+  ['Camp Nou / partido', 'Revisar calendario antes de comprar tour.'],
+  ['Cena final', 'Reservar un lugar bueno para el 27/09.'],
+  ['Traslado salida', 'Definir taxi/Aerobús para salir 28/09 temprano.'],
+  ['Google Maps offline', 'Descargar mapa de Barcelona antes de viajar.']
+];
+
 const sources = [
  ['Sagrada Família oficial','https://sagradafamilia.org/en/tickets-individuals'],
  ['Park Güell oficial','https://parkguell.barcelona/en/planning-your-visit/prices-and-times'],
@@ -105,23 +124,11 @@ const sources = [
  ['Sant Pau oficial','https://santpaubarcelona.org/es/']
 ];
 
-function renderDays(){
-  const cont=document.getElementById('daysContainer');
-  cont.innerHTML='';
-  dayData.forEach(day=>{
-    let html=`<article class="day"><div class="day-head"><div><h3>${day.title}</h3><p>${day.label}</p></div><span class="badge">${routeSummary(day.id)}</span></div><div class="timeline">`;
-    day.stops.forEach((s,i)=>{
-      const [time,title,desc,price,duration,pid]=s;
-      html+=`<div class="stop"><div class="time">${time}</div><div class="stop-card"><h4>${title}</h4><p>${desc}</p><div class="meta"><span class="pill">${price}</span><span class="pill">${duration}</span><a class="pill" href="${gmaps(points[pid])}" target="_blank">Abrir mapa</a></div>`;
-      if(i<day.stops.length-1){
-        const next=day.stops[i+1][5];
-        html+=routeBlock(pid,next);
-      }
-      html+=`</div></div>`;
-    });
-    html+=`</div></article>`;
-    cont.insertAdjacentHTML('beforeend',html);
-  });
+function routeSummary(dayId){
+  if(dayId==='day4') return 'Salida temprano · no turístico';
+  let arr=routes[dayId], total=0;
+  for(let i=0;i<arr.length-1;i++) total+=distKm(points[arr[i]],points[arr[i+1]]);
+  return `${total.toFixed(1)} km aprox. entre puntos`;
 }
 
 function routeBlock(a,b){
@@ -129,71 +136,97 @@ function routeBlock(a,b){
   return `<div class="route"><strong>Próximo traslado:</strong> ${points[a].name} → ${points[b].name}<br>📏 ${km.toFixed(1)} km · 🚶 ${walkMin(km)} min · 🚇/🚌 ${transportHint(a,b)} · 🚖 ${taxiMin(km)} min aprox.</div>`;
 }
 
-function routeSummary(dayId){
-  if(dayId==='day4') return 'Salida temprano · no turístico';
-  let arr=routes[dayId], total=0;
-  for(let i=0;i<arr.length-1;i++) total+=distKm(points[arr[i]],points[arr[i+1]]);
-  return `${total.toFixed(1)} km aprox. de recorrido entre puntos`;
+function renderDays(){
+  const cont=document.getElementById('daysContainer');
+  cont.innerHTML='';
+  dayData.forEach(day=>{
+    let html=`<article class="day"><div class="day-head"><div><h3>${day.title}</h3><p>${day.label}</p></div><span class="badge">${routeSummary(day.id)}</span></div><div class="timeline">`;
+    day.stops.forEach((s,i)=>{
+      const [time,title,desc,price,duration,pid]=s;
+      html+=`<div class="stop"><div class="time">${time}</div><div class="stop-card"><h4>${title}</h4><p>${desc}</p><div class="meta"><span class="pill">${price}</span><span class="pill">${duration}</span><a class="pill" href="${gmaps(points[pid])}" target="_blank" rel="noopener">Abrir mapa</a></div>`;
+      if(i<day.stops.length-1) html+=routeBlock(pid, day.stops[i+1][5]);
+      html+=`</div></div>`;
+    });
+    html+=`</div></article>`;
+    cont.insertAdjacentHTML('beforeend',html);
+  });
 }
 
 function renderRanking(){
   const body=document.getElementById('rankingBody');
   body.innerHTML='';
   ranking.forEach(r=>{
-    const cls=r[1].length>=5?'p5':r[1].length>=4?'p4':r[1].length>=3?'p3':'p2';
-    body.insertAdjacentHTML('beforeend',`<tr><td>${r[0]}</td><td class="priority ${cls}">${r[1]}</td><td><strong>${r[2]}</strong></td><td>${r[3]}</td></tr>`);
+    body.insertAdjacentHTML('beforeend',`<tr><td>${r[0]}</td><td class="priority">${r[1]}</td><td><strong>${r[2]}</strong></td><td>${r[3]}</td></tr>`);
+  });
+}
+
+function renderChecklist(){
+  const box=document.getElementById('checklistBox');
+  box.innerHTML='';
+  checklist.forEach((c,i)=>{
+    box.insertAdjacentHTML('beforeend',`<label class="check-item"><input type="checkbox" data-check="${i}"><div><strong>${c[0]}</strong><br><span>${c[1]}</span></div></label>`);
+  });
+  box.querySelectorAll('input').forEach(inp=>{
+    inp.checked = localStorage.getItem('check_'+inp.dataset.check)==='1';
+    inp.addEventListener('change',()=>localStorage.setItem('check_'+inp.dataset.check, inp.checked?'1':'0'));
   });
 }
 
 function renderSources(){
   const el=document.getElementById('sourcesList');
   el.innerHTML='';
-  sources.forEach(s=>el.insertAdjacentHTML('beforeend',`<a href="${s[1]}" target="_blank">${s[0]}</a>`));
+  sources.forEach(s=>el.insertAdjacentHTML('beforeend',`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`));
 }
 
-function project(p, bounds){
-  const x=(p.lon-bounds.minLon)/(bounds.maxLon-bounds.minLon)*820+40;
-  const y=(bounds.maxLat-p.lat)/(bounds.maxLat-bounds.minLat)*480+40;
-  return [x,y];
+let map, layerGroup;
+function markerIcon(type){
+  const colors = {base:'#2563eb', airport:'#475569', ticket:'#f97316', walk:'#16a34a', view:'#7c3aed', stadium:'#dc2626'};
+  return L.divIcon({
+    className:'custom-marker',
+    html:`<span style="background:${colors[type]||'#0f172a'}"></span>`,
+    iconSize:[18,18],
+    iconAnchor:[9,9]
+  });
 }
 
 function renderMap(routeId='day1'){
-  const svg=document.getElementById('routeMap');
-  const ids=routes[routeId] || routes.day1;
-  const pts=ids.map(id=>points[id]);
-  const bounds={
-    minLat:Math.min(...Object.values(points).map(p=>p.lat))-.004,
-    maxLat:Math.max(...Object.values(points).map(p=>p.lat))+.004,
-    minLon:Math.min(...Object.values(points).map(p=>p.lon))-.006,
-    maxLon:Math.max(...Object.values(points).map(p=>p.lon))+.006
-  };
-  let html=`<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#f97316" /></marker></defs><rect x="0" y="0" width="900" height="560" rx="26" fill="#f8fafc"/><g opacity=".55" stroke="#cbd5e1" stroke-width="1">`;
-  for(let x=60;x<860;x+=80) html+=`<line x1="${x}" x2="${x}" y1="30" y2="530"/>`;
-  for(let y=60;y<520;y+=70) html+=`<line y1="${y}" y2="${y}" x1="30" x2="870"/>`;
-  html+=`</g>`;
-  if(routeId!=='all'){
-    for(let i=0;i<pts.length-1;i++){
-      const [x1,y1]=project(pts[i],bounds), [x2,y2]=project(pts[i+1],bounds);
-      html+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#f97316" stroke-width="4" marker-end="url(#arrow)" opacity=".9"/>`;
-    }
+  if(!map){
+    map = L.map('map', {scrollWheelZoom:false}).setView([41.389,2.168], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+    layerGroup=L.layerGroup().addTo(map);
   }
-  Object.values(points).forEach(p=>{
-    if(routeId!=='all'&&!ids.includes(p.id)) return;
-    const [x,y]=project(p,bounds);
-    const isHotel=p.id==='hotel';
-    html+=`<g><circle cx="${x}" cy="${y}" r="${isHotel?13:10}" fill="${isHotel?'#2563eb':'#0f172a'}"/><text x="${x+14}" y="${y+5}" font-size="14" font-weight="800" fill="#111827">${p.name}</text></g>`;
+  layerGroup.clearLayers();
+  const ids = routes[routeId] || routes.day1;
+  const latLngs = [];
+  ids.forEach(id=>{
+    const p=points[id];
+    const m=L.marker([p.lat,p.lon], {icon:markerIcon(p.type)}).addTo(layerGroup);
+    m.bindPopup(`<strong>${p.name}</strong><br><a href="${gmaps(p)}" target="_blank" rel="noopener">Abrir en Google Maps</a>`);
+    latLngs.push([p.lat,p.lon]);
   });
-  html+=`<text x="40" y="535" font-size="13" fill="#64748b">Mapa esquemático generado localmente · no sustituye Google Maps</text>`;
-  svg.innerHTML=html;
+  if(routeId!=='all' && latLngs.length>1){
+    L.polyline(latLngs, {color:'#f97316', weight:4, opacity:.8}).addTo(layerGroup);
+  }
+  map.fitBounds(latLngs, {padding:[35,35]});
 }
 
-document.querySelectorAll('.tabs button').forEach(btn=>btn.addEventListener('click',()=>{
-  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+document.querySelectorAll('.map-tabs button').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.map-tabs button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  renderMap(btn.dataset.map);
+  renderMap(btn.dataset.route);
 }));
+
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  const dark=document.documentElement.dataset.theme==='dark';
+  document.documentElement.dataset.theme = dark ? '' : 'dark';
+  document.getElementById('themeToggle').textContent = dark ? 'Modo oscuro' : 'Modo claro';
+});
 
 renderDays();
 renderRanking();
+renderChecklist();
 renderSources();
 renderMap('day1');

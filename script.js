@@ -4,6 +4,7 @@ const points = {
   hotel: lodging,
   aeropuerto:{id:'aeropuerto', name:'Aeropuerto BCN', lat:41.2974, lon:2.0833, type:'airport'},
   rambla:{id:'rambla', name:'La Rambla', lat:41.3808, lon:2.1738, type:'walk'},
+  boqueria:{id:'boqueria', name:'Mercado de La Boqueria', lat:41.3818, lon:2.1716, type:'walk'},
   plazareal:{id:'plazareal', name:'Plaça Reial', lat:41.3801, lon:2.1751, type:'walk'},
   gotico:{id:'gotico', name:'Barrio Gótico', lat:41.3839, lon:2.1763, type:'walk'},
   catedral:{id:'catedral', name:'Catedral de Barcelona', lat:41.3839, lon:2.1762, type:'walk'},
@@ -16,6 +17,7 @@ const points = {
   pedrera:{id:'pedrera', name:'La Pedrera', lat:41.3954, lon:2.1619, type:'ticket'},
   palau:{id:'palau', name:'Palau de la Música Catalana', lat:41.3876, lon:2.1753, type:'ticket'},
   born:{id:'born', name:'El Born / Museo Picasso', lat:41.3852, lon:2.1810, type:'walk'},
+  santamaria:{id:'santamaria', name:'Santa Maria del Mar', lat:41.3838, lon:2.1820, type:'walk'},
   barceloneta:{id:'barceloneta', name:'Barceloneta', lat:41.3790, lon:2.1896, type:'walk'},
   campnou:{id:'campnou', name:'Barça Immersive Tour', lat:41.3809, lon:2.1228, type:'stadium'},
   montjuic:{id:'montjuic', name:'Castillo de Montjuïc', lat:41.3635, lon:2.1663, type:'view'},
@@ -24,9 +26,9 @@ const points = {
 };
 
 const routes = {
-  day1:['aeropuerto','hotel','rambla','plazareal','gotico','catedral','portvell','hotel'],
+  day1:['aeropuerto','hotel','boqueria','rambla','plazareal','gotico','catedral','portvell','hotel'],
   day2:['hotel','sagrada','santpau','parkguell','bunkers','hotel'],
-  day3:['hotel','batllo','pedrera','palau','born','barceloneta','campnou','montjuic','mnac','fonts','hotel'],
+  day3:['hotel','batllo','pedrera','palau','born','santamaria','barceloneta','campnou','mnac','fonts','hotel'],
   day4:['hotel','aeropuerto'],
   all:Object.keys(points)
 };
@@ -54,48 +56,53 @@ function transportHint(from,to){
 }
 
 const dayData = [
- {id:'day1', title:'Día 1 · Jueves 25/09 · Llegada + primera vuelta', label:'No reservar entradas caras · recorrido flexible cerca del alojamiento', stops:[
-  ['13:00','Llegada a Barcelona','Aterrizaje estimado. Entre equipaje, salida del aeropuerto y traslado, calcular 1 h 30 a 2 h hasta estar instalados.','€6–40','1 h 30–2 h','aeropuerto'],
-  ['15:00','Llegada al alojamiento / check-in','Base: Carrer Nou de la Rambla, 31. Dejar valijas, cargar celulares y organizar la tarde.','-','45 min','hotel'],
-  ['16:00','La Rambla','Primera caminata corta desde el alojamiento. Buen punto para ubicarse, pero evitar comer en locales demasiado turísticos.','Gratis','30 min','rambla'],
-  ['16:40','Plaça Reial','Plaza muy linda, cerca del alojamiento. Buena para primera foto grupal y café corto.','Gratis','25 min','plazareal'],
-  ['17:15','Barrio Gótico','Recorrido caminando por calles históricas. Sin entradas ni presión de horarios.','Gratis','1 h','gotico'],
-  ['18:15','Catedral de Barcelona','Ver exterior y alrededores. Entrar solo si hay ganas y tiempo.','Gratis exterior','30–45 min','catedral'],
-  ['19:15','Port Vell / paseo marítimo','Bajar caminando hacia el puerto para cerrar la tarde con vista al mar.','Gratis','45 min','portvell'],
-  ['21:00','Cena de bienvenida','Recomendación: Poble-sec, Sant Antoni o El Born antes que restaurantes de La Rambla.','€20–35','Flexible','hotel']
+ {id:'day1', title:'Día 1 · Jueves 25/09 · Llegada + Centro Histórico', label:'Tarde tranquila · Sin reservas ni entradas caras', stops:[
+  ['13:00','Llegada a Barcelona','Llegada al aeropuerto. Entre equipaje, salida y traslado, calcular aproximadamente 2 horas hasta quedar instalados.','-','1 h 30–2 h','aeropuerto'],
+  ['15:00','Check-in','Alojamiento en Carrer Nou de la Rambla, 31. Dejar valijas, descansar y organizar la salida de la tarde.','-','45 min','hotel'],
+  ['16:00','Mercado de La Boqueria','Primera parada ideal por cercanía. Probar jugos, fruta, jamón ibérico o comprar algo para desayunar. Evitar decidir en los primeros puestos de la entrada.','Gratis / €5–20','45–60 min','boqueria'],
+  ['17:00','La Rambla','Recorrido corto para ubicarse. Buena conexión entre Boqueria, Plaça Reial y el Gótico. Tener cuidado con celulares y billeteras.','Gratis','30 min','rambla'],
+  ['17:40','Plaça Reial','Una de las plazas más lindas del centro. Buena para fotos, descanso o tomar algo rápido.','Gratis','20 min','plazareal'],
+  ['18:10','Barrio Gótico','Caminar por calles medievales, Plaça Sant Jaume, calle del Bisbe y alrededores. Ideal para recorrer sin horario fijo.','Gratis','1 h','gotico'],
+  ['19:15','Catedral de Barcelona','Ver exterior y alrededores. Entrar solamente si tienen ganas y tiempo.','Gratis exterior','30 min','catedral'],
+  ['20:00','Port Vell + Monumento a Colón','Bajar caminando hacia el puerto para cerrar la tarde con vista al mar.','Gratis','45 min','portvell'],
+  ['21:00','Cena','Recomendación: Poble-sec, Sant Antoni o El Born. Evitar cenar sobre La Rambla.','€20–35','Flexible','hotel']
  ]},
- {id:'day2', title:'Día 2 · Viernes 26/09 · Gaudí fuerte + vistas', label:'Día completo principal · reservar Sagrada Familia y Park Güell', stops:[
-  ['09:00','Sagrada Familia','Imprescindible del viaje. Reservar online y llegar 15 minutos antes. Mejor hacerla temprano.','€36–40','2 h','sagrada'],
-  ['11:45','Recinte Modernista Sant Pau','Muy recomendable: arquitectura espectacular y menos masivo que Sagrada Familia.','€16–18','1 h 15','santpau'],
-  ['14:00','Almuerzo zona Sant Pau / Gràcia','Evitar restaurantes pegados a atracciones. Buscar menú del día o tapas casuales.','€18–30','1 h','santpau'],
-  ['16:30','Park Güell','Reservar horario. Ir sin apuro: hay subidas y conviene llegar con margen.','€18','1 h 30','parkguell'],
-  ['18:45','Bunkers del Carmel','Opcional pero muy buen atardecer. Si están cansados, cambiar por mirador más cómodo o volver al alojamiento.','Gratis','1 h','bunkers'],
-  ['21:30','Cena','Volver hacia Poble-sec/Sant Antoni/Gràcia según energía.','€25–40','Flexible','hotel']
+ {id:'day2', title:'Día 2 · Viernes 26/09 · Gaudí', label:'Día fuerte · Reservar Sagrada Familia y Park Güell', stops:[
+  ['09:00','Sagrada Familia','Visita principal del viaje. Llegar 15 minutos antes y reservar online con anticipación.','€36–40','2 h','sagrada'],
+  ['11:30','Recinte Modernista Sant Pau','Muy recomendable y menos masivo que Sagrada Familia. Arquitectura modernista excelente.','€16–18','1 h','santpau'],
+  ['13:00','Almuerzo','Zona Sant Pau / Gràcia. Buscar menú del día o tapas casuales, evitando restaurantes pegados a atracciones.','€20–30','1 h','santpau'],
+  ['15:00','Park Güell','Reservar para la tarde. Ir con margen porque hay subidas y el acceso puede llevar tiempo.','€18','1 h 30','parkguell'],
+  ['18:00','Bunkers del Carmel','Atardecer con vista panorámica. Si están cansados, reemplazar por volver a descansar o por Montjuïc/MNAC.','Gratis','1 h','bunkers'],
+  ['21:00','Cena','Gràcia o Sant Antoni. Elegir zona según energía del grupo.','€25–40','Flexible','hotel']
  ]},
- {id:'day3', title:'Día 3 · Sábado 27/09 · Centro + fútbol + Montjuïc', label:'Día completo final · elegir bien prioridades', stops:[
+ {id:'day3', title:'Día 3 · Sábado 27/09 · Modernismo + Playa + Fútbol', label:'Último día completo · Elegir prioridades', stops:[
   ['09:30','Passeig de Gràcia','Ver Casa Batlló, Casa Amatller y La Pedrera por fuera. Zona ideal para fotos y compras.','Gratis','45 min','batllo'],
-  ['10:30','Casa Batlló o La Pedrera','Elegir una para no gastar de más. Para primera vez: Casa Batlló. Para terraza: La Pedrera.','€29–45','1 h 30','batllo'],
-  ['12:30','Palau de la Música Catalana','Visita corta, céntrica y distinta. Buena alternativa a sumar otro Gaudí caro.','€20–24','1 h','palau'],
-  ['14:00','El Born + almuerzo','Zona ideal para tapas y caminar. Museo Picasso solo si el grupo quiere arte.','€20–35','1 h 30','born'],
-  ['16:00','Barceloneta','Paseo por playa y puerto. Si el grupo prioriza fútbol, acortar esta parte.','Gratis','1 h','barceloneta'],
-  ['17:30','Barça Immersive Tour / Camp Nou Experience','Opción futbolera principal. Si hay partido, priorizar partido sobre tour.','€25–40 aprox.','1 h 30–2 h','campnou'],
-  ['19:45','Montjuïc / MNAC / Fuente Mágica','Cierre panorámico cerca del alojamiento. Confirmar si hay espectáculo de Fuente Mágica.','Gratis exterior / €12 museo','1 h 30','mnac'],
-  ['21:30','Última cena','Cena grupal final: tapas, paella o hamburguesas según presupuesto.','€25–45','Flexible','hotel']
+  ['10:30','Casa Batlló o La Pedrera','Elegir solamente una para no gastar de más. Para primera visita elegiría Casa Batlló; para terraza, La Pedrera.','€30–45','1 h 30','batllo'],
+  ['12:30','Palau de la Música Catalana','Visita corta y muy visual. Buena alternativa para sumar arquitectura sin repetir otro Gaudí caro.','€20–24','1 h','palau'],
+  ['13:45','El Born','Recorrer el barrio antes de almorzar. Buena zona para caminar, tapas y calles lindas.','Gratis','30 min','born'],
+  ['14:15','Santa Maria del Mar','Una de las iglesias más lindas de Barcelona. Muy recomendable y suele quedar fuera de los recorridos más turísticos.','Gratis / donativo','30 min','santamaria'],
+  ['15:00','Almuerzo','Almorzar en El Born. Buena zona para tapas o comida casual.','€20–35','1 h','born'],
+  ['16:30','Barceloneta','Paseo por playa y puerto. Si el grupo prioriza fútbol, acortar esta parte.','Gratis','1 h','barceloneta'],
+  ['18:00','Camp Nou Experience','Opción futbolera principal. Si hay partido, reemplazar el tour por el partido.','€30–40 aprox.','2 h','campnou'],
+  ['20:30','Montjuïc / MNAC / Fuente Mágica','Cierre panorámico cerca del alojamiento. Confirmar si hay espectáculo de Fuente Mágica.','Gratis exterior / €12 museo','1 h','mnac'],
+  ['21:30','Cena de despedida','Última cena del viaje. Recomendación: tapas, paella o restaurante reservado previamente.','€25–45','Flexible','hotel']
  ]},
- {id:'day4', title:'Día 4 · Domingo 28/09 · Salida temprano', label:'No cuenta como día turístico · vuelo 09:00', stops:[
-  ['05:45','Salida del alojamiento','Para vuelo 09:00 conviene salir muy temprano. Confirmar hora exacta según aeropuerto/terminal y equipaje.','Taxi/Aerobús','45–60 min','hotel'],
-  ['06:30','Llegada al aeropuerto','Margen recomendado para vuelo internacional/equipaje.','-','2 h aprox.','aeropuerto'],
-  ['09:00','Vuelo de salida','No planificar turismo este día.','-','-','aeropuerto']
+ {id:'day4', title:'Día 4 · Domingo 28/09 · Regreso', label:'Salida temprano · No planificar turismo', stops:[
+  ['05:45','Salida del alojamiento','Para vuelo 09:00 conviene salir muy temprano. Definir taxi, Aerobús o traslado la noche anterior.','Taxi/Aerobús','45–60 min','hotel'],
+  ['06:30','Aeropuerto','Llegar con margen para equipaje y controles.','-','2 h aprox.','aeropuerto'],
+  ['09:00','Vuelo','Fin del viaje.','-','-','aeropuerto']
  ]}
 ];
 
 const ranking = [
  ['Sagrada Familia','⭐⭐⭐⭐⭐','Obligatorio','La visita más importante. Comprar con anticipación para el 26/09.'],
+ ['Mercado de La Boqueria','⭐⭐⭐⭐⭐','Obligatorio','Ideal para el día de llegada. Queda a 5 minutos del alojamiento.'],
  ['Park Güell','⭐⭐⭐⭐','Muy recomendado','Caro para ser parque, pero visualmente muy Barcelona. Mejor el 26/09 a la tarde.'],
  ['Casa Batlló','⭐⭐⭐⭐','Recomendado','Mejor interior modernista para primera visita; precio alto.'],
  ['La Pedrera','⭐⭐⭐','Opcional','Buena terraza, pero elegiría una entre esta y Casa Batlló.'],
  ['Sant Pau','⭐⭐⭐⭐','Sorpresa positiva','Arquitectura excelente y menos saturada.'],
  ['Palau de la Música','⭐⭐⭐⭐','Muy recomendado','Visita corta, céntrica y distinta.'],
+ ['Santa Maria del Mar','⭐⭐⭐⭐⭐','Muy recomendado','Una de las iglesias más lindas de Barcelona. Agregarla en El Born.'],
  ['Museo Picasso','⭐⭐⭐','Según gustos','Solo si el grupo quiere museo de arte; si no, caminar El Born.'],
  ['Barceloneta/Poblenou','⭐⭐⭐⭐','Recomendado','Ideal para cortar con edificios y comer relajado.'],
  ['Montjuïc / MNAC exterior','⭐⭐⭐⭐','Recomendado','Vistas, fotos y cierre cómodo cerca del alojamiento.'],

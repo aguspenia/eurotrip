@@ -1,40 +1,21 @@
-# Barcelona 25–27 Septiembre · Itinerario 4 amigos
+# Barcelona Eurotrip · GitHub Pages
 
-Sitio estático listo para publicar en GitHub Pages.
+Sitio estático para el itinerario de Barcelona.
 
-## Cómo publicarlo
+## Cómo subirlo
 
-1. Crear un repositorio nuevo en GitHub, por ejemplo `barcelona-itinerario`.
-2. Subir estos archivos a la rama `main`:
-   - `index.html`
-   - `styles.css`
-   - `script.js`
-   - `README.md`
-3. Ir a **Settings → Pages**.
-4. En **Build and deployment**, elegir:
-   - Source: `Deploy from a branch`
-   - Branch: `main`
-   - Folder: `/root`
-5. Guardar.
-6. En unos minutos GitHub genera una URL tipo:
+1. Descomprimir el ZIP.
+2. Subir `index.html`, `styles.css` y `script.js` al repositorio.
+3. Hacer commit.
+4. En GitHub Pages, publicar desde `main` y `/root`.
 
-```text
-https://TU-USUARIO.github.io/barcelona-itinerario/
-```
+## Importante
 
-## Qué incluye
+Esta versión corrige el itinerario con:
+- llegada a Barcelona el 25/09 a las 13:00;
+- salida el 28/09 a las 09:00;
+- día 1 sin Sagrada Familia;
+- Sagrada Familia movida al día 2;
+- mapa interactivo con Leaflet/OpenStreetMap.
 
-- Itinerario del 25, 26 y 27 de septiembre.
-- Base en Carrer Nou de la Rambla, 31.
-- Mapas esquemáticos generados localmente.
-- Distancias aproximadas en km.
-- Tiempos caminando, transporte recomendado y taxi aproximado.
-- Ranking de lugares.
-- Presupuesto por persona y grupo.
-- Sección de estadios: Barça Immersive Tour / Camp Nou Experience y RCDE Stadium.
-- Checklist de reservas.
-- Enlaces de referencia para revisar precios y disponibilidad.
-
-## Nota
-
-Las distancias se calcularon con coordenadas aproximadas y un factor de ruta urbana. Para navegar, usar los enlaces a Google Maps incluidos en cada parada.
+Si el sitio publicado no cambia, borrar caché del navegador o abrir en incógnito.
